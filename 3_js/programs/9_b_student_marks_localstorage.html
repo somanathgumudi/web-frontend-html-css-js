@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MentorX</title>
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style>
+        .main-container {
+            display: flex;
+        }
+
+        .container {
+            width: 50%;
+            margin: 4%;
+        }
+
+        .marksInputBox {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .marksInputBox input {
+            width: 25%;
+        }
+
+        .buttonsBox button {
+            margin-right: 5px;
+            padding: 5px 10px;
+        }
+
+        .saveButton {
+            background-color: green;
+            color: white;
+        }
+
+        .rankButton {
+            background-color: blue;
+            color: white;
+        }
+
+        .calculateButton {
+            background-color: orange;
+            color: white;
+        }
+
+        .sortDropdown {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="../../images/mentorX-logo.svg">
+</header>
+<div class="main-container">
+    <div class="container">
+        <h2>Student Marks</h2>
+        <input id="roll" type="text" placeholder="Enter Roll Number"><br>
+        <input id="name" type="text" placeholder="Enter Name"><br>
+
+        <div class="marksInputBox">
+            <input id="math" type="number" placeholder="Math *"><br>
+            <input id="computer" type="number" placeholder="Computer *"><br>
+            <input id="english" type="number" placeholder="English *"><br>
+            <input id="science" type="number" placeholder="Science *"><br>
+            <input id="social" type="number" placeholder="Social *"><br>
+            <input id="hindi" type="number" placeholder="Hindi *"><br>
+            <input id="telugu" type="number" placeholder="Telugu"><br>
+            <input id="oriya" type="number" placeholder="Oriya"><br>
+        </div>
+
+        <div class="buttonsBox">
+            <button class="saveButton" onclick="saveData()">Save Data</button>
+            <button class="rankButton" onclick="populateRanks()">Populate Ranks</button>
+            <button class="calculateButton" onclick="calculateTotal()">Total Marks</button>
+            <button class="calculateButton" onclick="calculateAverage()">Average Marks</button>
+            <button class="calculateButton" onclick="calculatePercentage()">Percentage</button>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Stored Student Data</h2>
+        <div class="sortDropdown">
+            <label for="sortData">Sort By: </label>
+            <select id="sortData" onchange="sortData()">
+                <option value="roll">Roll Number</option>
+                <option value="name">Name</option>
+                <option value="rank">Rank</option>
+            </select>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Total Marks</th>
+                <th>Average</th>
+                <th>Percentage</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="storedData"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Edit Student Data</h2>
+        <input id="editRoll" type="text" placeholder="Enter Roll Number"><br>
+        <input id="editName" type="text" placeholder="Enter Name"><br>
+
+        <div class="marksInputBox">
+            <input id="editMath" type="number" placeholder="Math *"><br>
+            <input id="editComputer" type="number" placeholder="Computer *"><br>
+            <input id="editEnglish" type="number" placeholder="English *"><br>
+            <input id="editScience" type="number" placeholder="Science *"><br>
+            <input id="editSocial" type="number" placeholder="Social *"><br>
+            <input id="editHindi" type="number" placeholder="Hindi *"><br>
+            <input id="editTelugu" type="number" placeholder="Telugu"><br>
+            <input id="editOriya" type="number" placeholder="Oriya"><br>
+        </div>
+        <div class="buttonsBox">
+            <button class="saveButton" onclick="updateData()">Update Data</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let editIndex = -1;
+
+    function getMarks(prefix = '') {
+        let subjects = ['math', 'computer', 'english', 'science', 'social', 'hindi'];
+        let optionalSubjects = ['telugu', 'oriya'];
+        let marks = subjects.map(subject => Number(document.getElementById(prefix + subject).value) || 0);
+        optionalSubjects.forEach(subject => {
+            let mark = Number(document.getElementById(prefix + subject).value) || 0;
+            if (mark > 0) {
+                marks.push(mark);
+            }
+        });
+        return marks;
+    }
+
+    function calculateTotal() {
+        let marks = getMarks();
+        let total = marks.reduce((sum, mark) => sum + mark, 0);
+        let denominator = marks.length * 100;
+
+        document.getElementById("result").innerHTML = `Total Marks: ${total}/${denominator}`;
+    }
+
+    function calculateAverage() {
+        let marks = getMarks();
+        let total = marks.reduce((sum, mark) => sum + mark, 0);
+        let average = total / marks.length;
+        document.getElementById("result").innerHTML = "Average Marks: " + average.toFixed(2);
+    }
+
+    function calculatePercentage() {
+        let marks = getMarks();
+        let total = marks.reduce((sum, mark) => sum + mark, 0);
+        let denominator = marks.length * 100;
+        let percentage = (total / denominator) * 100;
+        document.getElementById("result").innerHTML = `Percentage: ${percentage.toFixed(2)}% (Total Marks: ${total}/${denominator})`;
+    }
+
+    function saveData() {
+        let roll = document.getElementById("roll").value;
+        let name = document.getElementById("name").value;
+        let marks = getMarks();
+        let total = marks.reduce((sum, mark) => sum + mark, 0);
+        let average = total / marks.length;
+        let denominator = marks.length * 100;
+        let percentage = (total / denominator) * 100;
+
+        let studentData = {
+            roll: roll,
+            name: name,
+            total: total,
+            average: average.toFixed(2),
+            percentage: percentage.toFixed(2),
+            denominator: denominator,
+            marks: marks
+        };
+
+        let allData = JSON.parse(localStorage.getItem('studentData')) || [];
+        allData.push(studentData);
+        localStorage.setItem('studentData', JSON.stringify(allData));
+        sortData();  // Ensure the data is sorted before displaying
+        displayStoredData();
+        resetForm();
+    }
+
+    function resetForm() {
+        document.getElementById("roll").value = '';
+        document.getElementById("name").value = '';
+        document.querySelectorAll('.marksInputBox input').forEach(input => input.value = '');
+    }
+
+    function displayStoredData() {
+        let allData = JSON.parse(localStorage.getItem('studentData')) || [];
+        let storedDataTbody = document.getElementById('storedData');
+        storedDataTbody.innerHTML = '';
+
+        // Calculate ranks
+        allData.sort((a, b) => b.total - a.total);
+        allData.forEach((data, index) => {
+            data.rank = index + 1;
+        });
+
+        // Display data
+        allData.forEach((data, index) => {
+            let row = storedDataTbody.insertRow();
+            row.innerHTML = `
+                <td>${data.rank}</td>
+                <td>${data.roll}</td>
+                <td>${data.name}</td>
+                <td>${data.total}/${data.denominator}</td>
+                <td>${data.average}</td>
+                <td>${data.percentage}%</td>
+                <td>
+                  <button onclick="openModal(${index})">Edit</button>
+                  <button onclick="deleteData(${index})">Delete</button>
+                </td>
+            `;
+        });
+    }
+
+    function openModal(index) {
+        let allData = JSON.parse(localStorage.getItem('studentData'));
+        let data = allData[index];
+
+        document.getElementById("editRoll").value = data.roll;
+        document.getElementById("editName").value = data.name;
+        document.getElementById("editMath").value = data.marks[0] || '';
+        document.getElementById("editComputer").value = data.marks[1] || '';
+        document.getElementById("editEnglish").value = data.marks[2] || '';
+        document.getElementById("editScience").value = data.marks[3] || '';
+        document.getElementById("editSocial").value = data.marks[4] || '';
+        document.getElementById("editHindi").value = data.marks[5] || '';
+        document.getElementById("editTelugu").value = data.marks[6] || '';
+        document.getElementById("editOriya").value = data.marks[7] || '';
+
+        editIndex = index;
+        document.getElementById("editModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("editModal").style.display = "none";
+    }
+
+    function updateData() {
+        let allData = JSON.parse(localStorage.getItem('studentData'));
+
+        let roll = document.getElementById("editRoll").value;
+        let name = document.getElementById("editName").value;
+        let marks = getMarks('edit');
+        let total = marks.reduce((sum, mark) => sum + mark, 0);
+        let average = total / marks.length;
+        let denominator = marks.length * 100;
+        let percentage = (total / denominator) * 100;
+
+        let updatedData = {
+            roll: roll,
+            name: name,
+            total: total,
+            average: average.toFixed(2),
+            percentage: percentage.toFixed(2),
+            denominator: denominator,
+            marks: marks
+        };
+
+        allData[editIndex] = updatedData;
+        localStorage.setItem('studentData', JSON.stringify(allData));
+        closeModal();
+        sortData();  // Ensure the data is sorted after updating
+        displayStoredData();
+    }
+
+    function deleteData(index) {
+        let allData = JSON.parse(localStorage.getItem('studentData'));
+        allData.splice(index, 1);
+        localStorage.setItem('studentData', JSON.stringify(allData));
+        displayStoredData();
+    }
+
+    function populateRanks() {
+        let allData = JSON.parse(localStorage.getItem('studentData')) || [];
+        allData.sort((a, b) => b.total - a.total);
+        localStorage.setItem('studentData', JSON.stringify(allData));
+        displayStoredData();
+    }
+
+    function sortData() {
+        let allData = JSON.parse(localStorage.getItem('studentData')) || [];
+        let sortBy = document.getElementById("sortData").value;
+
+        if (sortBy === "roll") {
+            allData.sort((a, b) => a.roll.localeCompare(b.roll));
+        } else if (sortBy === "name") {
+            allData.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortBy === "rank") {
+            allData.sort((a, b) => b.total - a.total);
+        }
+
+        localStorage.setItem('studentData', JSON.stringify(allData));
+        displayStoredData();
+    }
+
+    // Ensure data is sorted by roll number by default on page load
+    window.onload = () => {
+        document.getElementById("sortData").value = "roll";
+        sortData();
+    };
+</script>
+</body>
+</html>

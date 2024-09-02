@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>table print</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="0_mentorX_theme.css">
+</head>
+<body>
+	<header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+	<div class="container">
+		<h1>Table printed</h1>
+		<input type="number" id="minimum" placeholder="enter your minimum number">
+		<input type="number" id="maximum" placeholder="enter your maximum number">
+		<button onclick="showTables()">Show Tabels</button>
+		<div id="result"></div>
+	</div>
+	<script>
+		// function primeNumber(){
+		// minimum=document.getElementById("minimum").value;
+		// maximum=document.getElementById("maximum").value;
+		//  for(let i=minimum; i<maximum; i++)
+		//  {
+		//  	if isprime(i){
+		//  		result+=i+",";
+		//  	}
+		//  }
+		//   document.getElementById("result").innerHTML=result;
+		// }
+		function showTables(){
+		let minimum=document.getElementById("minimum").value;
+		let maximum=document.getElementById("maximum").value;
+		let result=" ";
+		  for(let t=minimum; t<maximum; t++)
+		  {
+		  	for(let i=1; i<=10; i++)
+			{
+				result+=t+"*"+i+"="+t*i+"<br>";
+			}
+			result+= "<br>";
+		  }
+		  document.getElementById("result").innerHTML=result;	
+		}
+	</script>
+
+</body>
+</html>

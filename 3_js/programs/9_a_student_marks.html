@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MentorX</title>
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style>
+      .marksInputBox {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .marksInputBox input {
+        width: 25%;
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+    <div class="container">
+        <h2>Student Marks</h2>
+        <input id="roll" type="text" placeholder="Enter Roll Number"><br>
+        <input id="name" type="text" placeholder="Enter Name"><br>
+
+        <div class="marksInputBox">
+          <input id="math" type="number" placeholder="Math *"><br>
+          <input id="computer" type="number" placeholder="Computer *"><br>
+          <input id="english" type="number" placeholder="English *"><br>
+          <input id="science" type="number" placeholder="Science *"><br>
+          <input id="social" type="number" placeholder="Social *"><br>
+          <input id="hindi" type="number" placeholder="Hindi *"><br>
+          <input id="telugu" type="number" placeholder="Telugu"><br>
+          <input id="oriya" type="number" placeholder="Oriya"><br>
+        </div>
+        
+        <div class="buttonsBox">
+          <button onclick="calculateTotal()">Total Marks</button>
+          <button onclick="calculateAverage()">Average Marks</button>
+          <button onclick="calculatePercentage()">Percentage</button>
+        </div>
+        <div id="result" class="result"></div>
+    </div>
+    <script>
+      function getMarks() {
+        let subjects = ['math', 'computer', 'english', 'science', 'social', 'hindi'];
+        let optionalSubjects = ['telugu', 'oriya'];
+        let marks = subjects.map(subject => Number(document.getElementById(subject).value) || 0);
+        optionalSubjects.forEach(subject => {
+          let mark = Number(document.getElementById(subject).value) || 0;
+          if (mark > 0) {
+            marks.push(mark);
+          }
+        });
+        return marks;
+      }
+
+      function calculateTotal() {
+        let marks = getMarks();
+        let total = marks.reduce((sum, mark) => sum + mark, 0);
+        let denominator = marks.length * 100;
+
+        document.getElementById("result").innerHTML = `Total Marks: ${total}/${denominator}`;
+      }
+
+      function calculateAverage() {
+        let marks = getMarks();
+        let total = marks.reduce((sum, mark) => sum + mark, 0);
+        let average = total / marks.length;
+        document.getElementById("result").innerHTML = "Average Marks: " + average.toFixed(2);
+      }
+
+      function calculatePercentage() {
+        let marks = getMarks();
+        let total = marks.reduce((sum, mark) => sum + mark, 0);
+        let denominator = marks.length * 100;
+        let percentage = (total / denominator) * 100;
+        document.getElementById("result").innerHTML = `Percentage: ${percentage.toFixed(2)}% (Total Marks: ${total}/${denominator})`;
+      }
+    </script>        
+</body>
+</html>

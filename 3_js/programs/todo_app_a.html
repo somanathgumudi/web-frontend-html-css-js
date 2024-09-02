@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo App</title>
+</head>
+<style>
+	body{
+		margin: 0;
+		background-color: blueviolet;
+	}
+	h2{
+		text-align: center;
+		color: blue;
+	}
+	.todo-app{
+    width:100%;
+    max-width:540px;
+    background-color: white;
+    margin:100px auto 20px;
+    padding:40px 30px 70px;
+   border-radius: 10px;
+   }
+   button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    padding:10px;
+    font-weight:14px ; 
+}
+    button{
+    border:none;
+    outline:none;
+    padding:16px 40px;
+    background-color:orangered;
+    border-radius:40px;
+    color:white;
+    font-size: 16px;
+    cursor: pointer;
+}
+   .row input {
+        padding: 8px;
+        font-size: 12px;
+    }
+    .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background-color: #eedef0;
+    border-radius:30px;
+    padding-left: 20px;
+    margin-bottom:25px;
+
+
+}
+
+</style>
+<body>
+	<div class="container">
+		<div class="todo-app">
+			<h2>Todo List</h2>
+			<div class="row">
+				<input type="text" id="inputBox" placeholder="Enter your text">
+				<button onclick="addTask()">Add</button>
+			</div>
+
+			<div id="result"></div>
+			
+		</div>
+	</div>
+	<script>
+		function addTask(){
+			let input=document.getElementById("inputBox").value;
+		    // let result=document.getElementById("result");
+				if (input === ''){
+					alert("you must write somthing!");
+	            }
+	            else{
+	            	result.innerHTML += input + "<br>";
+	            	document.getElementById("inputBox").value = "";
+	              
+	            }
+        }
+		                              
+	</script>
+</body>
+</html>

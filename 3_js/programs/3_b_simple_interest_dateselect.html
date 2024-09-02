@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorX</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+</head>
+<body>
+    <header>
+        <img src="../../images/mentorX-logo.svg" alt="MentorX Logo">
+    </header>
+    <div class="container">
+        <h2>Simple Interest Calculator</h2>
+        
+        <label for="principal">Principal:</label>
+        <input id="principal" type="number" placeholder="Enter principal amount">
+
+        <label for="rate">Rate (%) :</label>
+        <input id="rate" type="number" placeholder="Enter interest rate like 12, 24, 36" >
+
+        <label for="fromDate">From Date:</label>
+        <input id="fromDate" type="date">
+
+        <label for="toDate">To Date:</label>
+        <input id="toDate" type="date">
+
+        <button onclick="calculateSimpleInterest()">Calculate</button>
+        
+        <div id="result"></div>
+    </div>
+    <footer id="footer-placeholder"></footer>
+    <script src="0_mentorX_theme.js"></script>
+    <script>
+        function calculateSimpleInterest() {
+            var p = document.getElementById("principal").value;
+            var r = document.getElementById("rate").value;
+            var t = calculateYears(document.getElementById("fromDate").value, document.getElementById("toDate").value);
+            
+            var interest = (p * t * r) / 100;
+
+            document.getElementById("result").innerHTML = "Simple Interest : " + interest.toFixed(2);
+        }
+
+        function calculateYears(fromDateString, toDateString) {
+            var fromDate = new Date(fromDateString);
+            var toDate = new Date(toDateString);
+            var differenceInMilliseconds = toDate - fromDate;
+
+            var  years = differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365);
+            return years;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MentorX</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style type="text/css">
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #FFE0B2;
+            margin-bottom: 2px;
+            border-radius: 10px;
+            padding: 10px 10px;
+        }
+        .todo-item.completed {
+            text-decoration: line-through;
+            color: #9E9E9E;
+        }
+        .todo-content {
+            flex-grow: 1;
+        }
+        .todo-content h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+       
+        .actions {
+            display: flex;
+            flex-shrink: 0;
+        }
+        .actions button {
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+            color: white;
+        }
+        .actions .complete-btn {
+            background-color: green;
+        }
+        .actions .uncomplete-btn {
+            background-color: orange;
+        }
+        .actions .edit-btn {
+            background-color: #007bff;
+        }
+        .actions .delete-btn {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+  <header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+
+  <div class="container">
+    <h2>Todo Task List (Local Storage) </h2>
+    <input type="text" id="title" placeholder="Title">
+    <textarea id="description" placeholder="Description"></textarea>
+    <button onclick="addTodoTask()">Add Todo Task</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <div id="editModal" class="modal" style="display:none">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <h2>Edit Todo Task</h2>
+      <input type="text" id="editTitle" placeholder="Title">
+      <textarea id="editDescription" placeholder="Description"></textarea>
+      <button onclick="updateTodoTask()">Save</button>
+    </div>
+  </div>
+
+  <script>
+    let todoTaskListLS = JSON.parse(localStorage.getItem('todoTaskListLS')) || [];
+    let editIndex = -1;
+
+    function addTodoTask() {
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
+      if (title && description) {
+        const newTodo = {
+          title,
+          description,
+          completed: false,
+          created_at: new Date(),
+          updated_at: new Date()
+        };
+        todoTaskListLS.push(newTodo);
+        localStorage.setItem('todoTaskListLS', JSON.stringify(todoTaskListLS));
+        renderTodoTaskList();
+        document.getElementById('title').value = '';
+        document.getElementById('description').value = '';
+      } else {
+        alert('Please enter a title and description.');
+      }
+    }
+
+    function renderTodoTaskList() {
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '<h3>Todo Items</h3>';
+      todoTaskListLS.forEach((todo, index) => {
+        const todoItem = document.createElement('div');
+        todoItem.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+        todoItem.innerHTML = `
+          <div class="todo-content">
+            <h3>
+              ${todo.title}
+              <div class="actions">
+                <button class="${todo.completed ? 'uncomplete-btn' : 'complete-btn'}" onclick="toggleComplete(${index})">${todo.completed ? 'Uncomplete' : 'Complete'}</button>
+                <button class="edit-btn" onclick="openModal(${index})">Edit</button>
+                <button class="delete-btn" onclick="deleteTodoTask(${index})">Delete</button>
+              </div>
+            </h3>
+            <h4>${todo.description}</h4>
+            <h6 style="float:right">Created at: ${new Date(todo.created_at).toLocaleString()}<br>
+            Updated at: ${new Date(todo.updated_at).toLocaleString()}</h6>
+          </div>
+        `;
+        resultDiv.appendChild(todoItem);
+      });
+    }
+
+    function toggleComplete(index) {
+      todoTaskListLS[index].completed = !todoTaskListLS[index].completed;
+      todoTaskListLS[index].updated_at = new Date();
+      localStorage.setItem('todoTaskListLS', JSON.stringify(todoTaskListLS));
+      renderTodoTaskList();
+    }
+
+    function openModal(index) {
+      editIndex = index;
+      document.getElementById('editTitle').value = todoTaskListLS[index].title;
+      document.getElementById('editDescription').value = todoTaskListLS[index].description;
+      document.getElementById('editModal').style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById('editModal').style.display = "none";
+    }
+
+    function updateTodoTask() {
+      const newTitle = document.getElementById('editTitle').value;
+      const newDescription = document.getElementById('editDescription').value;
+      if (newTitle && newDescription) {
+        todoTaskListLS[editIndex].title = newTitle;
+        todoTaskListLS[editIndex].description = newDescription;
+        todoTaskListLS[editIndex].updated_at = new Date();
+        localStorage.setItem('todoTaskListLS', JSON.stringify(todoTaskListLS));
+        renderTodoTaskList();
+        closeModal();
+      } else {
+        alert('Please enter a title and description.');
+      }
+    }
+
+    function deleteTodoTask(index) {
+      if (confirm('Are you sure you want to delete this to-do item?')) {
+        todoTaskListLS.splice(index, 1);
+        localStorage.setItem('todoTaskListLS', JSON.stringify(todoTaskListLS));
+        renderTodoTaskList();
+      }
+    }
+
+    renderTodoTaskList();
+  </script>
+</body>
+</html>

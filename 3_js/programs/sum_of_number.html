@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>sum of number</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="0_mentorX_theme.css">
+</head>
+<body>
+	<header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+	<div class="container">
+		<h1>Sum of Number</h1>
+		<input type="number" id="input" placeholder="enter your number">
+		<button onclick="sum()">Sum</button>
+		<button onclick="factorial()">factorial</button>
+		<div id="result"></div>
+	</div>
+	<script>
+		function sum() {
+		let input=Number(document.getElementById('input').value);
+		let result=0;
+		  for(let i=input; i>=1; i--)
+		  {
+		  	result+=i;
+		  }
+         document.getElementById("result").innerHTML=result;
+		}
+
+		function factorial() {
+		let input=document.getElementById('input').value;
+		let result=1;
+		for(let i=input; i>=1; i--)
+		{
+			result*=i;
+		}
+		document.getElementById("result").innerHTML=result;
+        }
+	</script>
+</body>
+</html>
+
+

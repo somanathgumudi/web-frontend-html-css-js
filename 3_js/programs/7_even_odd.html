@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MentorX</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style type="text/css">
+        .main-container {
+            display: flex;
+        }
+
+        .container {
+            width: 50%;
+            margin:4%;
+            height: 200px;
+            text-align: center;
+        }
+        .button{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+  <header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+      <center><div class="container">
+        <h2>Check Even or Odd</h2>
+        <input type="number" id="number" placeholder="Enter your number">
+        <button onclick="checkEvenOdd()">chack Even or Odd</button>
+          <div id="evenOddResult"></div>
+      </div>
+      </center>
+      <script>
+         function isEvenNumber(num){
+        if (num % 2 === 0)
+          return true
+        else
+          return false
+      }
+          function checkEvenOdd() {
+        let num = document.getElementById("number").value;
+        let isEven = isEvenNumber(num);
+        if (isEven){
+            result = "Even";
+        }else{
+            result = "Odd"
+        }
+        document.getElementById("evenOddResult").innerHTML = "The number is: " + result;
+      }
+      </script>
+</body>

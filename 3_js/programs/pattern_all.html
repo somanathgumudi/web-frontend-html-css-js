@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pattern1</title>
+	 <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style>
+    	h1{
+    		color: rgb(16, 150, 228)
+    	}
+    	 #dropdown-result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1096e4;
+        }
+        #patterntype{
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .input-group button:hover {
+            background-color: #ff8000; 
+        }
+    </style>
+</head>
+<body>
+	<header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+	<div class="container">
+		<h1>Print Patterns</h1>
+		<label for="pattern-type">Pattern Type:</label>
+            <select id="patterntype">
+                <option value="TriangleStar">Triangle Star</option>
+                <option value="Triangle123">Triangle 123 </option>
+                <option value="Triangle321">Triangle 321 </option>
+                <option value="Square"> Square </option>
+
+
+            </select>
+        <label for="pattern">Pattern:</label>
+		<input type="number" id="lines" placeholder="Enter number of lines">
+		<button onclick="pattern1()">Print pattern</button>
+		<div id="result"></div>
+	</div>
+	<script>
+		function pattern1 () {
+		let lines= document.getElementById("lines").value;
+		let patterntype= document.getElementById("patterntype").value;
+		let result=" ";
+
+		if(patterntype == "TriangleStar"){
+			result = patternTriangleStar(lines);
+		   }
+		   else if (patterntype == "Triangle123"){
+			result = patternTriangle123(lines);
+		   }
+		   else if (patterntype == "Triangle321"){
+			result = patternTriangle321(lines);
+		}
+         document.getElementById("result").innerHTML=result;
+	}
+		function patternTriangleStar(lines) {
+			let l = document.getElementById('lines').value;
+			let i = 1;
+			let j = 1;
+			let result = " ";
+
+			while (i<=l){
+				  j=1;
+				while (j<=i){
+					   result += "*";                    
+					j=j+1;
+				} 
+				result +="<br>"
+				i=i+1;
+			}
+			return result; 
+		}
+
+		function patternTriangle123(lines) {
+			let l = document.getElementById('lines').value;
+			let i = 1;
+			let j = 1;
+			let result = " ";
+
+			while (i<=l){
+				  j=1;
+				while (j<=i){
+					   result += "123";                    
+					j=j+1;
+				} 
+				result +="<br>"
+				i=i+1;
+			}
+			return result;
+		}
+			function patternTriangle321(lines) {
+			let l = document.getElementById('lines').value;
+			let i = 1;
+			let j = 1;
+			let result = " ";
+
+			while (i<=l){
+				  j=1;
+				while (j<=i){
+					   result += "321";                    
+					j=j+1;
+				} 
+				result +="<br>"
+				i=i+1;
+			}
+			return result;
+		}
+		function squarepattern(lines){
+			let res = "  ";
+			for(let i=0; i<n; i++){
+				for(let j = 0; j<n; j++){
+					result += " * ";
+				}
+				result+="<br>";
+			}
+			return result;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style>
+      .container {
+        width: 240px;
+      }
+      .buttonsBox {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        margin-left: 2%;
+      }
+      .buttonsBox button {
+        width: 50px;
+      }
+    </style>
+</head>
+<body>
+<header>
+    <img src="../../images/mentorX-logo.svg">
+</header>
+<div class="container">
+  <h1>Calculator</h1>
+    <input type="text" id="input" onclick="updateDisplayValue()"  placeholder="Input Expression">
+    <input type="text" id="result" disabled placeholder="Result">
+    <!-- Buttons are now marked with data-value for values to be appended
+    and data-action for specific actions like clear, backspace, and calculate. -->
+    <div class="buttonsBox" id="buttonsBox">
+      <button data-action="clear">C</button>
+      <button data-action="backspace">←</button>
+      <button data-value=".">.</button>
+      <button data-action="calculate">=</button>
+      <button data-value="1">1</button>
+      <button data-value="2">2</button>
+      <button data-value="3">3</button>
+      <button data-value="+">+</button>
+      <button data-value="4">4</button>
+      <button data-value="5">5</button>
+      <button data-value="6">6</button>
+      <button data-value="-">-</button>
+      <button data-value="7">7</button>
+      <button data-value="8">8</button>
+      <button data-value="9">9</button>
+      <button data-value="*">*</button>
+      <button data-value="0">0</button>
+      <button data-value="00">00</button>
+      <button data-value="%">%</button>
+      <button data-value="/">/</button>
+    </div>
+  </div>
+  
+  </body>
+  </html>

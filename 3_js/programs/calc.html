@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>calculator</title>
+	<link rel="stylesheet" type="text/css" href="0_mentorX_theme.css">
+</head>
+<body>
+	<header>
+		<img src="../../images/mentorX-logo.svg">
+	</header>
+	<div class="container">
+		<h2>
+			Calculator
+		</h2>
+		<input type="text" id="input" placeholder="Enter math expression 2+3*6">
+		<div id="result"> Result </div>
+		<div id="buttons">
+			<button onclick="clearScreen()">AC</button>
+			<button onclick="backspace()"><-</button>
+			<button onclick="calculate()">=</button>
+			<button onclick="append('1')">1</button>
+			<button onclick="append('2')">2</button>
+			<button onclick="append('3')">3</button>
+			<button onclick="append('+')">+</button>
+			<button onclick="append('4')">4</button>
+			<button onclick="append('5')">5</button>
+			<button onclick="append('6')">6</button>
+			<button onclick="append('-')">-</button>
+			<button onclick="append('7')">7</button>
+			<button onclick="append('8')">8</button>
+			<button onclick="append('9')">9</button>
+			<button onclick="append('*')">*</button>
+			<button onclick="append('0')">0</button>
+			<button onclick="append('00')">00</button>
+			<button onclick="append('/')">/</button>
+			<button onclick="append('%')">%</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function clearScreen() {
+			document.getElementById("input").value = "";
+		}
+
+		function backspace(){
+			let input = document.getElementById("input").value;
+			let output = input.slice(0,-1);
+			document.getElementById("input").value = output;
+		}
+
+
+		function append(c){
+			document.getElementById("input").value += c;
+		}
+
+		function calculate() {
+           let input = document.getElementById("input").value;
+           let result = eval(input);
+           document.getElementById("result").value = result;
+  }
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MentorX Datatypes</title>
+</head>
+<body>
+    <h2>Datatypes</h2>
+    <p>Please right click on the page > Inspect > Console </p>
+
+    <script type="text/javascript">
+        let num = 10; // int
+        console.log(num);
+
+        let floatNum = 3.14; // float
+        console.log(floatNum);
+
+        let message = 'Hello'; // string
+        let name = "Devendra Dora"; // string
+        
+        console.log(message+" "+name); // concatenate
+        console.log(`${message} ${name}`); // Template literals
+
+
+        let isStudent = true; // boolean
+        let hasLicense = false; // boolean
+
+        console.log(`is student ${isStudent}, has licence ${hasLicense}`);
+
+        let x;
+        console.log(x); // Output: undefined
+
+
+        let y = null;
+        console.log(y);
+
+        const sym1 = Symbol();
+        console.log(sym1);
+
+        const sym2 = Symbol('description');
+        console.log(sym2);
+
+        let today = new Date();
+        console.log(today);
+
+        let numbers = [1, 2, 3, 4, 5]; // array with numbers
+        console.log(numbers);
+
+        let fruits = ['apple', 'banana', 'orange']; // array with strings
+        console.log(fruits);
+
+        // Object
+        let person = {
+            name: 'Devendra Dora',
+            age: 30,
+            isStudent: false,
+            greet: function() {
+                console.log('Object Person with function greet Hello ' + this.name);
+            }
+        };
+        person.greet();
+
+        console.log(5 == '5');   // true (due to type coercion)
+        console.log(5 === '5');  // false (no type coercion)
+
+        console.log(0 == false);   // true (0 is coerced to false)
+        console.log(0 === false);  // false (different types)
+
+        console.log(null == undefined);   // true (both are considered equivalent)
+        console.log(null === undefined);  // false (different types)
+
+        console.log([] == 0);   // true (empty array is coerced to 0)
+        console.log([] === 0);  // false (different types)
+
+        console.log('5' + 5);  // '55' (string concatenation)
+        console.log('5' - 5);  // 0 (string '5' is coerced to number 5)
+
+        console.log(true + 1);  // 2 (true is coerced to 1)
+        console.log(false + 1); // 1 (false is coerced to 0)
+
+
+
+
+
+                
+    </script>
+</body>
+</html>

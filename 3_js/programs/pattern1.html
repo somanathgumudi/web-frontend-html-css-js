@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pattern1</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+</head>
+<body>
+	<header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+	<div class="container">
+		<h1>Print 1 patterns</h1>
+		<input type="number" id="lines" placeholder="Enter number of lines">
+		<button onclick="pattern1()">pattern1</button>
+		<div id="result"></div>
+	</div>
+	<script>
+		function pattern1() {
+			let l = document.getElementById('lines').value;
+			let i = 1;
+			let j = 1;
+			let result = " ";
+
+			while (i<=l){
+				  j=1;
+				while (j<=i){
+					   result += "1";                    
+					j=j+1;
+				} 
+				result +="<br>"
+				i=i+1;
+			}
+			document.getElementById("result").innerHTML=result; 
+		}
+	</script>
+</body>
+</html>

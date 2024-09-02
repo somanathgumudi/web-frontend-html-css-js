@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>finde maximum number</title>
+</head>
+<body>
+	<div class="container">
+	<input type="number" id="input" placeholder="enter your number">
+	<button onclick="findMaximum()">finde maximum</button>	
+	</div>
+   <script>
+   	function findMaximum(){
+   		let input= document.getElementById('input').value.split(",");
+   		let maximum=input[0];
+   		let n= input.length;
+
+   		for(let i=1; i<n; i++)
+   		{
+   			if(input[i]>maximum)
+   			{
+   				maximum=input[i];
+   			}
+   			document.getElementById("")= "maximum is"+maximum;
+   	}
+   </script>
+
+</body>
+</html>

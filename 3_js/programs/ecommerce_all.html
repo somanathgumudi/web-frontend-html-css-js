@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ecommerce all</title>
+	 <link rel="icon" href="favicon.ico" type="image/x-icon">
+     <link rel="stylesheet" href="0_mentorX_theme.css">
+     <style>
+     	.container{
+     		width: 20%
+
+     	}
+     </style>
+</head>
+<body>
+  <header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+	<div class="container">
+		<h2>Ecommerce all</h2>
+		<input type="text" id="input" placeholder="Enter numbers with ',"><br><br>
+		<button onclick="sum()">Sum</button><br>
+		<button onclick="product()">Product</button><br>
+		<button onclick="average()">Average</button><br>
+		<button onclick="concantenate()">Concantenate</button><br>
+		<button onclick="reverse()">Reverse</button><br>
+		<button onclick="squre()">Squre</button><br>
+		<button onclick="cube()">Cube</button><br>
+		<div id="result"></div>
+	</div>
+    <script>
+    function sum(){
+    		let array=document.getElementById('input').value.split(',');
+    		let sum=0;
+    		let n=array.length;
+    	for(let i=0; i<n; i++)
+    	   {
+    	   	sum+=Number(array[i]);
+    	   }
+    	   document.getElementById("result").innerHTML=sum;
+    	}
+
+    	function product(){
+    		let array=document.getElementById('input').value.split(',');
+    		let mult=1;
+    		let n=array.length;
+    	for(let i=0; i<n; i++)
+    	   {
+    	   	mult*=Number(array[i]);
+    	   }
+    	   document.getElementById("result").innerHTML=mult;
+    	}
+
+    	function average(){
+    		let array=document.getElementById('input').value.split(',');
+    		let sum=0;
+    		let n=array.length;
+    	for(let i=0; i<n; i++)
+    	   {
+    	   	sum+=Number(array[i]);
+    	   }
+    	   sum=sum/n;
+    	   document.getElementById("result").innerHTML=sum;
+    	}
+
+    	function concantenate(){
+    		let array=document.getElementById('input').value.split(',');
+    		let sum="";
+    		let n=array.length;
+    	for(let i=0; i<n; i++)
+    	   {
+    	   	sum+=array[i];
+    	   }
+    	   document.getElementById("result").innerHTML=sum;
+    	}
+
+    	function reverse(){
+    		let array=document.getElementById('input').value.split(',');
+    		let res="";
+    		let n=array.length;
+    	for(let i=0; i<n/2; i++)
+    	   {
+    	   	let temp = array[i];
+    	   	array[i] = array[n-1-i];
+    	   	array[n-1-i] = temp;
+    	   }
+    	 	res+= array + ",";
+    	   document.getElementById("result").innerHTML=res;
+    	}
+
+    	function squre(){
+    		let array=document.getElementById('input').value.split(',');
+    		let mult="";
+    		let n=array.length;
+    	for(let i=0; i<n; i++)
+    	   {
+    	   	mult+=array[i]**2 + ", ";
+    	   }
+    	   document.getElementById("result").innerHTML=mult;
+    	}
+    	function cube(){
+    		let array=document.getElementById('input').value.split(',');
+    		let mult="";
+    		let n=array.length;
+    	for(let i=0; i<n; i++)
+    	   {
+    	   	mult+=array[i]**3 + ", ";
+    	   }
+    	   document.getElementById("result").innerHTML=mult;
+    	}
+    	
+    </script>
+</body>
+</html>

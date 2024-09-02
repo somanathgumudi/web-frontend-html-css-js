@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorX: BMI Calculator</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style>
+        #bmi-table {
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        #bmi-table th {
+            background-color: #ee9e4e;
+        }
+
+        #bmi-table th, #bmi-table td {
+            padding: 8px;
+            border: 1px solid rgb(18, 17, 17);
+            text-align: left;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../../images/mentorX-logo.svg">
+    </header>
+    <div class="container">
+        <div class="calculator-section">
+            <h2>BMI Calculator</h2>
+        
+            <label for="weight">Weight (kg):</label>
+            <input id="weight" type="number" placeholder="Enter weight in kilograms">
+
+            <label for="height">Height (cm):</label>
+            <input id="height" type="number" placeholder="Enter height in centimeters">
+
+            <button onclick="calculateBMI()">Calculate</button>
+        
+            <div id="result"></div>
+        </div>
+        <table id="bmi-table">
+            <tr>
+                <th>BMI Range</th>
+                <th>Meaning</th>
+            </tr>
+            <tr>
+                <td>Less than 18.5</td>
+                <td>Underweight</td>
+            </tr>
+            <tr>
+                <td>18.5 - 24.9</td>
+                <td>Normal weight</td>
+            </tr>
+            <tr>
+                <td>25 - 29.9</td>
+                <td>Overweight</td>
+            </tr>
+            <tr>
+                <td>30 or greater</td>
+                <td>Obesity</td>
+            </tr>
+        </table>
+    </div>
+    <footer id="footer-placeholder"></footer>
+    <script src="0_mentorX_theme.js"></script>
+    <script>
+        function calculateBMI() {
+            var weight = document.getElementById("weight").value;
+            var height = document.getElementById("height").value / 100; 
+            
+            var bmi = weight / (height * height);
+            var bmiMeaning = "";
+
+            if (bmi < 18.5) {
+                bmiMeaning = "Underweight";
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                bmiMeaning = "Normal weight";
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                bmiMeaning = "Overweight";
+            } else if (bmi > 29.9) {
+                bmiMeaning = "Obesity";
+            } else {
+                bmiMeaning = "Invalid Input"
+            }
+
+            document.getElementById("result").innerHTML = "Your BMI: " + bmi.toFixed(2) + "<br>Meaning: " + bmiMeaning;
+        }
+    </script>
+</body>
+</html>

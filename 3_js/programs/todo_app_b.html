@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>todo app local storage</title>
+</head>
+<body>
+	<div class="container">
+		<h2>todo app localstorage</h2>
+		<div class="row">
+			<input type="text" id="inputbox" placeholder="Enter your text">
+			<button onclick="addTask()">Add</button>
+		</div>
+		<div id="result"></div>
+			
+		
+	</div>
+	<script>
+        let items = JSON.parse(localStorage.getItem("inputBox")) || [];
+		    function addTask(){
+			let input = document.getElementById("inputBox").value;
+			let items = input.value;
+			localStorage.setItem("inputBox", JSON.stringify(items));
+
+	
+	</script>
+</body>
+</html>

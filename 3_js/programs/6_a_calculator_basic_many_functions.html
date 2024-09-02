@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style>
+      .buttons-box button {
+        width: 50px;
+        margin: 10px;
+        float: left;
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <img src="../../images/mentorX-logo.svg">
+</header>
+  <div class="container">
+    <h2>Calculator Basic: using many functions </h2>
+    <div class="calculator">
+      <div class="input-box">
+        <input type="number" id="num1" placeholder="Enter number1">
+        <input type="number" id="num2" placeholder="Enter number2">
+      </div>
+      <div class="result-box">
+        <input type="text" id="result" placeholder="Result" disabled>
+      </div>
+      <div class="buttons-box">
+        <button onclick="add()">+</button>
+        <button onclick="subtract()">-</button>
+        <button onclick="multiply()">*</button>
+        <button onclick="divide()">/</button>
+        <button onclick="remainder()">%</button>
+      </div>
+      
+    </div>
+  </div>
+  <footer id="footer-placeholder"></footer>
+  <script src="0_mentorX_theme.js"></script>
+  <script>
+    function add() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      document.getElementById("result").value = num1 + num2;
+    }
+
+    function subtract() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      document.getElementById("result").value = num1 - num2;
+    }
+
+    function multiply() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      document.getElementById("result").value = num1 * num2;
+    }
+
+    function divide() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      if (num2 !== 0) {
+        document.getElementById("result").value = num1 / num2;
+      } else {
+        document.getElementById("result").value = "Cannot divide by zero";
+      }
+    }
+
+    function remainder() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      if (num2 !== 0) {
+        document.getElementById("result").value = num1 % num2;
+      } else {
+        document.getElementById("result").value = "Cannot divide by zero";
+      }
+    }
+  </script>
+</body>
+</html>

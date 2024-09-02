@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style>
+        .container {
+            width: 400px;
+            text-align: center;
+        }
+        .buttonsBox {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        .buttonsBox button {
+            width: 100px;
+            margin: 5px;
+            font-size: 12px;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+</style>
+</head>
+<body>
+<header>
+    <img src="../../images/mentorX-logo.svg">
+</header>
+<div class="container">
+  <h1>Stopwatch</h1>
+  <div id="result">00:00:00.0</div>
+  <div class="buttonsBox">
+    <button id="startBtn" onclick="start()">Start</button>
+    <button id="pauseBtn" onclick="pause()" disabled>Pause</button>
+    <button id="resumeBtn" onclick="resume()" disabled>Resume</button>
+    <button id="stopBtn" onclick="stop()" disabled>Stop</button>
+    <button id="resetBtn" onclick="reset()" disabled>Reset</button>
+  </div>
+</div>
+<script type="text/javascript">
+  let startTime, elapsedTime = 0, timerInterval;
+
+  function timeToString(time) {
+    let diffInHrs = time / 3600000; // Convert to hours ie = 60 min * 60 sec * 1000 milliseconds
+    let hh = Math.floor(diffInHrs); // Get whole hours
+
+    let diffInMin = (diffInHrs - hh) * 60; // Remaining minutes
+    let mm = Math.floor(diffInMin); // Get whole minutes
+
+    let diffInSec = (diffInMin - mm) * 60; // Remaining seconds
+    let ss = Math.floor(diffInSec); // Get whole seconds
+
+    let diffInMs = (diffInSec - ss) * 1000; // Remaining milliseconds
+    let ms = Math.floor(diffInMs / 100); // Get tenths of seconds
+
+    let formattedHH = hh.toString().padStart(2, "0");
+    let formattedMM = mm.toString().padStart(2, "0");
+    let formattedSS = ss.toString().padStart(2, "0");
+
+    return `${formattedHH}:${formattedMM}:${formattedSS}.${ms}`;
+  }
+
+  function print(txt) {
+    document.getElementById("result").innerHTML = txt;
+  }
+
+  function start() {
+    startTime = Date.now() - elapsedTime;
+    timerInterval = setInterval(function printTime() {
+      elapsedTime = Date.now() - startTime;
+      print(timeToString(elapsedTime));
+    }, 100);
+    toggleButtons(["startBtn", "resumeBtn"], ["pauseBtn", "stopBtn", "resetBtn"]);
+  }
+
+  function pause() {
+    clearInterval(timerInterval);
+    toggleButtons(["pauseBtn"], ["resumeBtn"]);
+  }
+
+  function resume() {
+    start();
+  }
+
+  function stop() {
+    clearInterval(timerInterval);
+    elapsedTime = 0;
+    print("00:00:00.0");
+    toggleButtons(["pauseBtn", "resumeBtn", "stopBtn"], ["startBtn", "resetBtn"]);
+  }
+
+  function reset() {
+    clearInterval(timerInterval);
+    print("00:00:00.0");
+    elapsedTime = 0;
+    toggleButtons(["pauseBtn", "resumeBtn", "stopBtn", "resetBtn"], ["startBtn"]);
+  }
+
+  function toggleButtons(disableButtons, enableButtons) {
+    disableButtons.forEach(buttonId => document.getElementById(buttonId).disabled = true);
+    enableButtons.forEach(buttonId => document.getElementById(buttonId).disabled = false);
+  }
+</script>
+</body>
+</html>

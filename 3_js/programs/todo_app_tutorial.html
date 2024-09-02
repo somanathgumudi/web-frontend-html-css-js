@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      *{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family:sans-serif;
+
+}
+.container{
+    width:100%;
+    min-height: 100vh;
+    /* background-color: #f5f5f5; */
+    background-color: blueviolet; /* Mint green background */
+    padding:10px;
+
+}
+.todo-app{
+    width:100%;
+    max-width:540px;
+    background-color: white;
+    margin:100px auto 20px;
+    padding:40px 30px 70px;
+   border-radius: 10px;
+
+}
+.todo-app h2{
+    display:flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color:blue
+}
+.todo-app h2 img{
+    width: 20px;
+    margin-left:10px;
+}
+.row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background-color: #eedef0;
+    border-radius:30px;
+    padding-left: 20px;
+    margin-bottom:25px;
+
+
+}
+input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    padding:10px;
+    font-weight:14px ; 
+}
+button{
+    border:none;
+    outline:none;
+    padding:16px 40px;
+    background-color:orangered;
+    border-radius:40px;
+    color:white;
+    font-size: 16px;
+    cursor: pointer;
+}
+ul li{
+    list-style: none;
+    font-size:17px;
+    user-select: none;
+    padding:12px 60px 12px 50px;
+    cursor: pointer;
+    position:relative;
+    white-space: normal;
+    word-wrap: break-word
+    
+}
+ul li::before{
+  content:'';
+  position: absolute;
+  border-radius: 50px;
+  background-image: url(/images/unchecked.png);
+  background-size: cover;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  top:8px;
+  left:8px;
+  background-position:center;
+  background-size: cover;
+}
+ul li.checked{
+    color:#555;
+    text-decoration: line-through;
+}
+ul li.checked::before{
+    background-image: url(/images/checked.png);
+}
+ul li .remove-span {
+    position:absolute;
+    right:10px;
+    top:5px;
+    width:40px;
+    height:40px;
+    font-size:22px;
+    text-align:center;
+    line-height:40px;
+}
+
+ul li .remove-span:hover{
+ background: #eedef0;
+ border-radius: 50%;
+}
+ul li .timestamp {
+    font-size: 14px;
+    color: #555; 
+    margin-left: 10px;
+}
+
+/* Media Queries for Mobile Phones */
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 5px;
+    }
+
+    .todo-app {
+        padding: 10px;
+    }
+
+    .row input {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+   
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <h2>To-Do List <img src="./images/icon.png" ></h2>
+            <div class="row">
+                <input type="text" id="input-box" placeholder="">
+                <button onclick="addTask()">Add</button>
+               
+
+            </div>
+            <ul id="list-container">
+                <!-- <li class="checked">rask</li><li>rask</li>
+                <li>rask</li> -->
+            </ul>
+        </div>
+    </div>
+    <script>
+      const inputBox = document.getElementById('input-box');
+const listContainer = document.getElementById('list-container')
+console.log(inputBox.value,"====inputbox")
+
+function addTask(){
+    if(inputBox.value===''){
+        alert('you must write something')
+    }
+    else{
+        // console.log(inputBox.value)
+       let li = document.createElement('li');
+       li.innerHTML = inputBox.value;
+       listContainer.appendChild(li);
+       let removeSpan = document.createElement("span");
+       removeSpan.innerHTML="\u00d7";
+       removeSpan.className = 'remove-span';
+       li.appendChild(removeSpan)
+       const timestampSpan = document.createElement('span');
+       timestampSpan.textContent = getTimestamp();
+       timestampSpan.className = 'timestamp';
+       
+       // Append the timestamp <span> to the <li> element
+       li.appendChild(timestampSpan);
+     
+     
+    }
+    inputBox.value = '';
+    saveData();
+
+}
+
+
+listContainer.addEventListener("click",(e)=>{
+  if(e.target.tagName=='LI'){
+    e.target.classList.toggle('checked');
+    saveData();
+  }
+  else if(e.target.tagName=='SPAN'){
+    e.target.parentElement.remove();
+    saveData();
+  }
+})
+
+
+function saveData(){
+    localStorage.setItem("data",listContainer.innerHTML)
+
+}
+function showTasks(){
+    listContainer.innerHTML=localStorage.getItem("data")
+}
+showTasks();
+
+function getTimestamp() {
+    const currentDate = new Date();
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return currentDate.toLocaleDateString('en-US', options);
+}
+
+const placeholderText = "please type here";
+const typingPlaceholder = document.getElementById("typing-placeholder");
+
+function typePlaceholder() {
+    let index = 0;
+    const interval = setInterval(() => {
+        if (index <= placeholderText.length) {
+            inputBox.setAttribute("placeholder", placeholderText.slice(0, index));
+            index++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 100); // Adjust the typing speed as needed
+}
+
+// Start the typing animation when the page loads
+window.onload = typePlaceholder;
+    </script>
+</body>
+</html>

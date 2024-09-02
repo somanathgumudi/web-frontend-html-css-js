@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container {
+            width: 48%;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            flex: 1;
+        }
+
+        .input-group input {
+            flex: 2;
+            margin-right: 10px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box; /* Include padding in the width */
+        }
+
+        .input-group button {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #1096e4; /* Orange background color */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .input-group button:hover {
+            background-color: #ff8000; /* Darker orange on hover */
+        }
+
+        /* Style for the dropdown */
+        #conversion-type {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #dropdown-result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1096e4;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../../images/mentorX-logo.svg">
+    </header>
+     <div class="main-container">
+        <div class="container">
+            <h2>Temperature Converter serese1</h2>
+        
+            <div class="input-group">
+                <label for="celsius">Celsius:</label>
+                <input id="celsius" type="number" placeholder="Enter temperature in Celsius">
+                <button onclick="convertToFahrenheit()">Convert to Fahrenheit</button>
+            </div>
+            
+            <div class="input-group">
+                <label for="fahrenheit">Fahrenheit:</label>
+                <input id="fahrenheit" type="number" placeholder="Enter temperature in Fahrenheit">
+                <button onclick="convertToCelsius()">Convert to Celsius</button>
+            </div>
+        
+            <div id="result"></div>
+        </div>
+        
+        <div class="container">
+            <h2>Temperature Converter Serese2</h2>
+
+            <label for="conversion-type">Conversion Type:</label>
+            <select id="conversion-type">
+                <option value="CtoF">Celsius to Fahrenheit</option>
+                <option value="FtoC">Fahrenheit to Celsius</option>
+            </select>
+            
+            <div class="input-group">
+                <label for="temperature">Temperature:</label>
+                <input id="temperature" type="number" placeholder="Enter temperature">
+                <button onclick="convertTemperatureByDropdown()">Convert</button>
+            </div>
+        
+            <div id="dropdown-result"></div>
+        </div>
+    </div>
+    <footer id="footer-placeholder"></footer>
+    <script src="0_mentorX_theme.js"></script>
+      <script>
+        function convertTemperature_else_if(conversionType, temperature) {
+            var result;
+            if (conversionType == "CtoF") {
+                result = (temperature * 9/5) + 32;
+            } else if (conversionType == "FtoC") {
+                result = (temperature - 32) * 5/9;
+            } else {
+                result = null;
+            }
+            return result;
+        }
+
+        function convertTemperature_switch_case(conversionType, temperature) {
+            var result;
+            switch(conversionType) {
+                case "CtoF":
+                    result = (temperature * 9/5) + 32;
+                    break;
+                case "FtoC":
+                    result = (temperature - 32) * 5/9;
+                    break;
+                default:
+                    result = null;
+            }
+            return result;
+        }
+
+        function convertToFahrenheit() {
+            var celsius = document.getElementById("celsius").value;
+            var fahrenheit = convertTemperature_else_if("CtoF", celsius);
+            document.getElementById("result").innerHTML = celsius + "°C is " + fahrenheit.toFixed(2) + "°F";
+        }
+
+        function convertToCelsius() {
+            var fahrenheit = document.getElementById("fahrenheit").value;
+            var celsius = convertTemperature_else_if("FtoC", fahrenheit);
+            document.getElementById("result").innerHTML = fahrenheit + "°F is " + celsius.toFixed(2) + "°C";
+        }
+
+        function convertTemperatureByDropdown() {
+            var conversionType = document.getElementById("conversion-type").value;
+            var temperature = document.getElementById("temperature").value;
+            var result = convertTemperature_switch_case(conversionType, temperature);
+            
+            if (conversionType == "CtoF") {
+                document.getElementById("dropdown-result").innerHTML = temperature + "°C is " + result.toFixed(2) + "°F";
+            } else if (conversionType == "FtoC") {
+                document.getElementById("dropdown-result").innerHTML = temperature + "°F is " + result.toFixed(2) + "°C";
+            }
+        }
+    </script>
+</body>
+</html>

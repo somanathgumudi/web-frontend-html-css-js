@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MentorX Variables and Constants</title>
+</head>
+<body>
+    <h2>Variables and Constants</h2>
+    <p>Please right click on the page > Inspect > Console </p>
+    <script type="text/javascript">
+        var firstName = "Devendra"; // function-scoped or globally scoped
+        let lastName = "Dor"; // are block-scoped
+        firstName ="Devendra Kumar"
+        lastName = "Dora"
+        console.log("Hello "+firstName+" "+lastName) // concatenate strings with +
+        
+        const PI = 3.14; // cannot be reassigned
+        // Attempting to reassign a const variable will result in an error
+        // PI = 3.14159; // TypeError: Assignment to constant variable.     
+        console.log(PI);
+    </script>
+</body>
+</html>

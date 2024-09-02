@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MentorX</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+    <style type="text/css">
+        .main-container {
+            display: flex;
+        }
+
+        .container {
+            width: 50%;
+            margin:4%;
+        }
+    </style>
+</head>
+<body>
+  <header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+
+    <div class="main-container">
+
+    <div class="container">
+        <h2>Check Even or Odd</h2>
+        <input id="number1" type="number" placeholder="Enter number">
+        <button onclick="checkEvenOdd()">Check Even or Odd</button>
+        <div id="evenOddResult"></div>
+    </div>
+
+    <div class="container">
+
+        <h2>Check Prime or Composite</h2>
+        <input id="number2" type="number" placeholder="Enter number">
+        <button onclick="checkPrimeComposite()">Check Prime or Composite</button>
+        <div id="primeCompositeResult"></div>
+    </div>
+  </div>
+    <div class="main-container">
+
+    <div class="container">
+        <h2>Number Range</h2>
+        <input id="rangeStart" type="number" placeholder="Start number">
+        <input id="rangeEnd" type="number" placeholder="End number">
+        <button onclick="printNumbers()">Print Numbers</button>
+        <button onclick="printEvenNumbers()">Print Even Numbers</button>
+        <button onclick="printOddNumbers()">Print Odd Numbers</button>
+        <button onclick="printPrimeNumbers()">Print Prime Numbers</button>
+        <div id="rangeResult"></div>
+    </div>
+        </div>
+
+    <script>
+
+      function isEvenNumber(num){
+        if (num % 2 === 0)
+          return true
+        else
+          return false
+      }
+
+      function isEvenNumber2(argument) {
+         let result = (num % 2 === 0) ? true : false;
+         return result
+      }
+
+      function isPrimeNumber(num) {
+        if (num <= 1) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+          if (num % i === 0) return false;
+        }
+        return true;
+      }
+
+
+      function checkEvenOdd() {
+        let num = document.getElementById("number1").value;
+        let isEven = isEvenNumber(num);
+        if (isEven){
+            result = "Even";
+        }else{
+            result = "Odd"
+        }
+        document.getElementById("evenOddResult").innerHTML = "The number is: " + result;
+      }
+
+
+      function checkPrimeComposite() {
+        let num = document.getElementById("number2").value;
+        if (num <= 1) {
+          document.getElementById("primeCompositeResult").innerHTML = "Neither prime nor composite";
+          return;
+        }
+        let isPrime = isPrimeNumber(num);
+        let result = isPrime ? "Prime" : "Composite";
+        document.getElementById("primeCompositeResult").innerHTML = "The number is: " + result;
+      }
+
+      function printNumbers2() {
+        let start = Number(document.getElementById("rangeStart").value);
+        let end = Number(document.getElementById("rangeEnd").value);
+        let resultDiv = document.getElementById("rangeResult");
+        resultDiv.innerHTML = "Numbers: ";
+        for (let i = start; i <= end; i++) {
+          resultDiv.innerHTML += i + ", ";
+        }
+      }
+
+      function printNumbers() {
+        let start = Number(document.getElementById("rangeStart").value);
+        let end = Number(document.getElementById("rangeEnd").value);
+        let result = [];
+        for (let i = start; i <= end; i++) {
+          result.push(i);
+        }
+        document.getElementById("rangeResult").innerHTML = "Numbers: " + result.join(", ");
+      }
+
+      function printEvenNumbers() {
+        let start = Number(document.getElementById("rangeStart").value);
+        let end = Number(document.getElementById("rangeEnd").value);
+        let result = [];
+        for (let i = start; i <= end; i++) {
+          if (i % 2 === 0) {
+            result.push(i);
+          }
+        }
+        document.getElementById("rangeResult").innerHTML = "Even Numbers: " + result.join(", ");
+      }
+
+      function printOddNumbers() {
+        let start = Number(document.getElementById("rangeStart").value);
+        let end = Number(document.getElementById("rangeEnd").value);
+        let result = [];
+        for (let i = start; i <= end; i++) {
+          if (i % 2 !== 0) {
+            result.push(i);
+          }
+        }
+        document.getElementById("rangeResult").innerHTML = "Odd Numbers: " + result.join(", ");
+      }
+
+      function printPrimeNumbers() {
+        let start = Number(document.getElementById("rangeStart").value);
+        let end = Number(document.getElementById("rangeEnd").value);
+        let result = [];
+        for (let i = start; i <= end; i++) {
+          if (isPrimeNumber(i)) {
+            result.push(i);
+          }
+        }
+        document.getElementById("rangeResult").innerHTML = "Prime Numbers: " + result.join(", ");
+      }
+
+      
+    </script>
+</body>
+</html>

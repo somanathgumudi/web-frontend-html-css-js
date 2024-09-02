@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MentorX</title>
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+</head>
+<body>
+  <header>
+    <img src="../../images/mentorX-logo.svg">
+  </header>
+    <div class="container">
+        <h2>Mathematical Expression Evaluate</h2>
+        <input id="expression" type="text" placeholder="Enter expression like 2+3*6">
+        <button onclick="calculate()">Calculate</button>
+        <div id="result" class="result"></div>
+    </div>
+    <script>
+      function calculate() {
+        let expression = document.getElementById("expression").value;
+        let result = eval(expression);
+        document.getElementById("result").innerHTML = "Result : " + result;
+      }
+    </script>        
+</body>
+</html>

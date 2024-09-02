@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Marks</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+</head>
+<body>
+	<header>
+		 <img src="../../images/mentorX-logo.svg">
+	</header>
+	<div class="container">
+		<center><label>Enter Name</label> 
+		<input type="text" id="name" placeholder="Ente Name"><br>
+		<h2>Marks (out of 100)</h2>
+		<label>Math</label>
+		<input type="number" id="math" placeholder=""><br><br>
+		<label>English</label>
+		<input type="number" id="english" placeholder=""><br><br>
+        <label>Odia</label>
+		<input type="number" id="odia" placeholder=""><br><br>
+		<label>Computer</label>
+		<input type="number" id="computer" placeholder=""><br><br>
+		<label>Science</label>
+		<input type="number" id="science" placeholder=""><br><br>
+		<div>
+		   <button onclick="total()">Total</button>
+		   <button onclick="average()">Average</button>
+		   <button onclick="percentage()">Percentage</button><br>
+		</div>   
+        	<div id="result"></div>
+	</center>
+	</div>
+	<script>
+		function total(){
+			let total = getSum();
+			document.getElementById("result").innerHTML = "Your total mark is " + total;
+		}
+		function getSum() {
+	      let math = document.getElementById("math").value;
+	      let english = document.getElementById("english").value;
+          let odia = document.getElementById("odia").value;
+          let computer = document.getElementById("computer").value;
+          let science = document.getElementById("science").value;
+          let sum = Number(math) + Number(english) + Number(odia) + Number(computer) +Number(science);
+         
+          return sum;
+      }
+      
+      function average(){
+        	let average = getSum()/5;
+            document.getElementById("result").innerHTML = "Your average mark is "+average;
+        }
+
+      function percentage(){
+      	let percentage = getSum()/500*100;
+        document.getElementById("result").innerHTML = "Your Percentage is  "+percentage + "%";
+      }
+	</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>fibonacai printed</title>
+</head>
+<body>
+  <div class="container">
+  	<input type="number" placeholder="enter your number">
+  	<button onclick="fibonacaiMain()">fibonacai</button>
+  	<div id="result"></div>
+  	<div>
+  	<script>
+  		function fibonacaiMain(){
+  			let n=document.getElementById('number');
+  			fibonacai(n);
+  		}
+  		function fibonacai(n){
+  			if(n==1 or n==0){
+  				return n;
+  			}
+  			else{
+  				return fibonacai(n-1)+fibonacai(n-2)
+  			}
+  		}	
+  		
+  	</script>
+</body>
+</html>

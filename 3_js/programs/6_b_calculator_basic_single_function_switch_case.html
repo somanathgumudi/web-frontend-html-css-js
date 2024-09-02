@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="0_mentorX_theme.css">
+<style>
+      .buttons-box button {
+        width: 50px;
+        margin: 10px;
+        float: left;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <img src="../../images/mentorX-logo.svg">
+    </header>
+
+    <div class="container">
+        <h2>Calculator Basic:<br> single function with switch case</h2>
+        <div class="calculator">
+            <div class="input-box">
+                <input type="number" id="number1" placeholder="Enter number1">
+                <input type="number" id="number2" placeholder="Enter number2">
+            </div>
+            <div class="result-box">
+                <input type="text" id="result" placeholder="result" disabled>
+            </div>
+            <div class="buttons-box">
+                <button onclick="calculate('+')">+</button>
+                <button onclick="calculate('-')">-</button>
+                <button onclick="calculate('*')">*</button>
+                <button onclick="calculate('/')">/</button>
+                <button onclick="calculate('%')">%</button>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function calculate(operator) {
+            var num1 = parseFloat(document.getElementById('number1').value);
+            var num2 = parseFloat(document.getElementById('number2').value);
+            var result;
+
+            switch (operator) {
+                case "+":
+                    result = num1 + num2;
+                break;
+                case "-":
+                    result = num1 - num2;
+                break;
+                case "*":
+                    result = num1 * num2;
+                break;
+                case "/":
+                if (num2 !==0 ) {
+                    result = num1 / num2;
+                } else{
+                    result = "Cannot divide by zero";
+                }
+                break;
+                case "%":
+                if (num2 !==0) {
+                    result = num1 % num2;
+                }else{
+                    result = "Cannot divide by zero";
+                }
+                break;
+              default:
+                result = "Invalide operator";  
+            
+            }
+            document.getElementById("result").value=result;
+        }
+        </script>
+    </body>
+    </html>

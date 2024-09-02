@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Backward Even/odd numbers</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="0_mentorX_theme.css">
+	<style>
+		h1{
+    		color: rgb(16, 150, 228)
+    	}
+	</style>
+</head>
+<body>
+	<header>
+		<img src="../../images/mentorX-logo.svg">
+	</header>
+	<div class="container">
+		<h1>Backward Even/Odd Numbers</h1>
+		<input type="number" id="maxmumNumber" placeholder="Enter maxmumNumber">
+		<input type="number" id="minmumNumber" placeholder="Enter minmumNumber">
+		<input type="number" id="minmumNumber" placeholder="Enter Prime Number">
+		<button onclick = "backEven()">Even Numbers</button><br><br><br><br>
+		<button onclick = "backOdd()">Odd Numbers</button><br><br><br>
+		<button onclick = "isprimeNumber()">Prime Numbers</button>
+
+		<div id="result"></div>
+	</div>
+<script>
+	function backEven() {
+		let maxmum = document.getElementById("maxmumNumber").value;
+		let minimum = document.getElementById("minmumNumber").value;
+		let i=maxmum
+		let result="";
+		if (maxmum%2!=0)
+		{
+			i=i-1;
+
+		}
+while(i>=minimum){
+	result+=i+",";
+	i=i-2;
+	}
+	document.getElementById("result").innerHTML = result;
+}
+function backOdd() {
+		let maxmum = document.getElementById("maxmumNumber").value;
+		let minimum = document.getElementById("minmumNumber").value;
+		let i=maxmum
+		let result="";
+		if (i%2==0)
+		{
+			i=i-1;
+
+		}
+while(i>=minimum){
+	result+=i+",";
+	i=i-2;
+	}
+	document.getElementById("result").innerHTML = result;
+}
+function isprimeNumber() {
+	let minimum = document.getElementById("minimum").value;
+	let maximum = document.getElementById('maximum').value;
+	let result="";
+	let i = maximum;
+	let isprime=false;
+	    while(i>=minimum){
+	    	isprime=isprimeNumber(i);
+	    if(isprime){
+	    	result+=i+",";
+	    }	
+	    i=i+1;
+	    }
+	    document.getElementById("result").innerHTML=result;
+}
+function isprimeNumber(num){
+	let i =1;
+	let factorCount=0;
+	if(num<=1)
+		return false;
+	while(i<=num){
+		if (num%i==0) {
+			factorCount+=1;
+		}
+		i+=1;
+	}
+	if (factorCount==2) {
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+</script>
+</body>
+</html>
